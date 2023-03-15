@@ -24,7 +24,7 @@
                 <div class="card  text-center">
                     <div class="card-body">
                         <span class="lead fs-4">Create Hospital</span>
-                        <form action="{{ route('hospitalStore') }}" method="post" class="px-5">
+                        <form action="{{ route('hospital.store') }}" method="post" class="px-5">
                             @csrf
                             <!-- Name input -->
                             <div class="form-floating my-4">
