@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateDoctorRequest;
 use App\Models\Department;
 use App\Models\Hospital;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class DoctorController extends Controller
 {
@@ -60,8 +61,6 @@ class DoctorController extends Controller
             "email" => $request->email,
             "phone" => $request->phone,
             "gender" => $request->gender,
-            "hospital_id" => $request->hospital,
-            "department_id" => $request->department,
             "image" => $filname,
         ]);
 
@@ -89,7 +88,8 @@ class DoctorController extends Controller
      */
     public function edit(Doctor $doctor)
     {
-        //
+        $hospitals = Hospital::all();
+        return view("doctor.edit", compact("doctor", "hospitals"));
     }
 
     /**
@@ -97,7 +97,35 @@ class DoctorController extends Controller
      */
     public function update(UpdateDoctorRequest $request, Doctor $doctor)
     {
-        //
+        $filename = "";
+        if ($request->has("image")) {
+            $image = $request->file("image");
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $location = "profiles/";
+            $image->move($location, $filename);
+
+            if ($request->oldImage) {
+                File::delete("profiles/$request->oldImage");
+            }
+        }
+
+        $doctor->update([
+            "name" => $request->name,
+            "email" => $request->email,
+            "phone" => $request->phone,
+            "gender" => $request->gender,
+            "image" => $filename,
+        ]);
+
+        if ($request->hospital) {
+            $doctor->hospital()->sync($request->hospital);
+        }
+
+        if ($request->department) {
+            $doctor->department()->sync($request->department);
+        }
+
+        return redirect()->back()->with("message", "Doctor updated");
     }
 
     /**
