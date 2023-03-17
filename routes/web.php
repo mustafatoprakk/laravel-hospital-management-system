@@ -28,6 +28,7 @@ Auth::routes();
 Route::resource("/user", UserController::class);
 //Doctors
 Route::resource("/doctor", DoctorController::class);
+Route::post("/getDepartment",[DoctorController::class,"getDepartment"])->name("getDepartment");
 //Department
 Route::resource("/department", DepartmentController::class);
 // Hospital

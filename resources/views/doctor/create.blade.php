@@ -16,57 +16,69 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     @endif
-                    <div class="card-header">
-                        <span class="lead fs-4">Create Doctors</span>
-                    </div>
                     <div class="card-body">
-                        <form action="{{ route('user.store') }}" method="post" class="px-5">
+                        <span class="lead fs-4">Create Doctors</span>
+                        <form action="{{ route('doctor.store') }}" method="post" class="px-5"
+                            enctype="multipart/form-data">
                             @csrf
                             <!-- Name input -->
-                            <div class="form-outline my-4">
-                                <input type="text" id="name" name="name" class="form-control" />
-                                <label class="form-label" for="name">Name</label>
+                            <div class="form-floating my-4">
+                                <input type="text" id="name" name="name" class="form-control "
+                                    placeholder="Doctor Name" />
+                                <label class="form-label" for="name">Doctor Name</label>
                             </div>
 
                             <!-- Email input -->
-                            <div class="form-outline mb-4">
-                                <input type="email" id="email" name="email" class="form-control" />
+                            <div class="form-floating mb-4">
+                                <input type="email" id="email" name="email" class="form-control"
+                                    placeholder="Doctor Email" />
                                 <label class="form-label" for="email">Email address</label>
                             </div>
 
                             <!-- Phone input -->
-                            <div class="form-outline mb-4">
-                                <input type="phone" id="phone" name="phone" class="form-control" />
-                                <label class="form-label" for="phone">Phone</label>
+                            <div class="form-floating mb-4">
+                                <input type="phone" id="phone" name="phone" class="form-control"
+                                    placeholder="Doctor Phone" />
+                                <label class="form-label" for="phone">Doctor Phone</label>
                             </div>
 
-                            <!-- Role input -->
-                            <select id="role" name="role" class="form-select mb-4" aria-label="Gender">
-                                <option selected>Gender</option>
-                                <option value="0">Female</option>
-                                <option value="1">Male</option>
-                            </select>
+                            <!-- Gender input -->
+                            <div class="form-floating">
+                                <select id="gender" name="gender" class="form-select mb-4" aria-label="Gender">
+                                    <option selected>Gender</option>
+                                    <option value="0">Female</option>
+                                    <option value="1">Male</option>
+                                </select>
+                                <label for="gender">Your Gender</label>
+                            </div>
 
-                            <!-- Role input -->
-                            <select id="hospital" name="hospital" class="form-select mb-4" aria-label="Hospital">
-                                <option selected>Hospital</option>
-                                <option value="0">Shouldice Hospital</option>
-                                <option value="1">Sharp Memorial Hospital</option>
-                            </select>
 
-                            <!-- Role input -->
-                            <select id="department" name="department" class="form-select mb-4" aria-label="Department">
-                                <option selected>Department</option>
-                                <option value="0">Surgery</option>
-                                <option value="1">Medicine</option>
-                            </select>
+                            <!-- Hospital input -->
+                            <div class="form-floating">
+                                <select id="hospital" name="hospital" class="form-select mb-4" aria-label="Hospital">
+                                    <option selected>Select Hospital</option>
+                                    @foreach ($hospitals as $hospital)
+                                        <option value="{{ $hospital->id }}">{{ strtoupper($hospital->name) }}</option>
+                                    @endforeach
+                                </select>
+                                <label for="hospital">Your Hospital</label>
+                            </div>
+
+                            <!-- Department input -->
+                            <div class="form-floating">
+                                <select id="department" name="department" class="form-select mb-4" aria-label="Department">
+                                </select>
+                                <label for="department">Your Department</label>
+                            </div>
 
                             <!-- Image input -->
                             <div class=" mb-4">
-                                <input type="file" class="form-control" id="image" name="image" />
+                                <input type="file" class="form-control form-control-lg" id="image" name="image" />
                             </div>
 
-                            <button type="submit" class="btn btn-primary btn-block mb-4">Create Doctor</button>
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary btn-block mb-4">Create Doctor</button>
+                            </div>
                         </form>
                     </div>
                 </div>

@@ -125,6 +125,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 
     <script>
@@ -135,6 +136,32 @@
                     'style',
                 placeholder: $(this).data('placeholder'),
                 closeOnSelect: false,
+            });
+        });
+
+
+        //getDepartment
+        $(document).ready(function() {
+            $("#hospital").change(function(e) {
+                e.preventDefault();
+                var hospitalId = this.value;
+                $("#department").html('');
+                $.ajax({
+                    url: '{{ route('getDepartment') }}',
+                    method: "POST",
+                    data: {
+                        hospital: hospitalId,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    dataType: 'json',
+                    success: function(result) {
+                        $("#department").html('<option value="">Select Department</option>');
+                        $.each(result.department, function(key, value) {
+                            $("#department").append('<option value="' + value.id +
+                                '"> ' + value.name.toUpperCase() + '</option>');
+                        })
+                    }
+                });
             });
         });
     </script>

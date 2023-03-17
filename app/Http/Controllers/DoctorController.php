@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Doctor;
 use App\Http\Requests\StoreDoctorRequest;
 use App\Http\Requests\UpdateDoctorRequest;
+use App\Models\Department;
+use App\Models\Hospital;
+use Illuminate\Http\Request;
 
 class DoctorController extends Controller
 {
@@ -33,7 +36,9 @@ class DoctorController extends Controller
      */
     public function create()
     {
-        return view("doctor.create");
+        $hospitals = Hospital::all();
+
+        return view("doctor.create", compact("hospitals"));
     }
 
     /**
@@ -41,7 +46,34 @@ class DoctorController extends Controller
      */
     public function store(StoreDoctorRequest $request)
     {
-        //
+
+        $filname = "";
+        if ($request->has("image")) {
+            $image = $request->file("image");
+            $filname = time() . '.' . $image->getClientOriginalExtension();
+            $location = "profiles/";
+            $image->move($location, $filname);
+        }
+
+        $doctor = Doctor::create([
+            "name" => $request->name,
+            "email" => $request->email,
+            "phone" => $request->phone,
+            "gender" => $request->gender,
+            "hospital_id" => $request->hospital,
+            "department_id" => $request->department,
+            "image" => $filname,
+        ]);
+
+        if ($request->has("hospital")) {
+            $doctor->hospital()->attach($request->hospital);
+        }
+
+        if ($request->has("department")) {
+            $doctor->department()->attach($request->department);
+        }
+
+        return redirect()->back()->with("message", "Doctor created");
     }
 
     /**
@@ -74,5 +106,17 @@ class DoctorController extends Controller
     public function destroy(Doctor $doctor)
     {
         //
+    }
+
+    public function getDepartment(Request $request)
+    {
+        $data["department"] = Department::from("departments as D")
+            ->select("D.name as name", "D.id as id")
+            ->join("hospital_department as HD", "HD.department_id", "D.id")
+            ->join("hospitals as H", "H.id", "HD.hospital_id")
+            ->where("H.id", $request->hospital)
+            ->get();
+
+        return response()->json($data);
     }
 }

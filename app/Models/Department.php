@@ -17,4 +17,9 @@ class Department extends Model
     {
         return $this->belongsToMany(Hospital::class, "hospital_department");
     }
+
+    public function doctor()
+    {
+        return $this->belongsToMany(Doctor::class, "doctor_department");
+    }
 }

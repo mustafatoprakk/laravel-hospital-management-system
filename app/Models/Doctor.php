@@ -14,8 +14,16 @@ class Doctor extends Model
         "email",
         "phone",
         "gender",
-        "department_id",
-        "hospital_id",
         "image"
     ];
+
+    public function department()
+    {
+        return $this->belongsToMany(Department::class, "doctor_department");
+    }
+
+    public function hospital()
+    {
+        return $this->belongsToMany(Hospital::class, "doctor_hospital");
+    }
 }
