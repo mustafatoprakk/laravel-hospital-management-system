@@ -17,8 +17,8 @@
                         </div>
                     @endif
                     <div class="card-body">
-                        <img src="/profiles/{{ $doctor->image }}" class="rounded-circle mx-auto d-block shadow" alt="..."
-                            width="200px" height="200px">
+                        <img src="/profiles/{{ $doctor->image }}" class="rounded-circle mx-auto d-block shadow"
+                            alt="..." width="200px" height="200px">
                         <form action="{{ route('doctor.update', $doctor->id) }}" method="post" class="px-5"
                             enctype="multipart/form-data">
                             @method('PUT')
@@ -86,7 +86,15 @@
                             </div>
 
                             <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-primary btn-block mb-4">Update Doctor</button>
+                                <button type="submit" class="btn btn-primary btn-block">Update Doctor</button>
+                                <div class="d-grid gap-2">
+                                    <form action="{{ route('doctor.destroy', $doctor->id) }}" method="post"
+                                        onsubmit="return confirm('Are you sure delete?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger mb-4">Delete Doctor</button>
+                                    </form>
+                                </div>
                             </div>
                         </form>
                     </div>

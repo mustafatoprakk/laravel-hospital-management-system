@@ -133,7 +133,13 @@ class DoctorController extends Controller
      */
     public function destroy(Doctor $doctor)
     {
-        //
+        File::delete("profiles/" . $doctor->image);
+
+        $doctor->delete();
+        $doctor->hospital()->detach();
+        $doctor->department()->detach();
+
+        return to_route("doctor.index")->with("message", "Doctor deleted");
     }
 
     public function getDepartment(Request $request)
