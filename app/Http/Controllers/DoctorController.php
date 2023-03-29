@@ -153,4 +153,16 @@ class DoctorController extends Controller
 
         return response()->json($data);
     }
+
+    public function getDoctor(Request $request)
+    {
+        $data["doctor"] = Doctor::from("doctors as D")
+            ->select("D.name as name", "D.id as id")
+            ->join("doctor_department as DD", "DD.doctor_id", "D.id")
+            ->join("departments as De", "De.id", "DD.department_id")
+            ->where("De.id", $request->department)
+            ->get();
+
+        return response()->json($data);
+    }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\HospitalController;
@@ -28,11 +29,14 @@ Auth::routes();
 Route::resource("/user", UserController::class);
 //Doctors
 Route::resource("/doctor", DoctorController::class);
-Route::post("/getDepartment",[DoctorController::class,"getDepartment"])->name("getDepartment");
+Route::post("/getDepartment", [DoctorController::class, "getDepartment"])->name("getDepartment");
+Route::post("/getDoctor", [DoctorController::class, "getDoctor"])->name("getDoctor");
 //Department
 Route::resource("/department", DepartmentController::class);
 // Hospital
 Route::resource("/hospital", HospitalController::class);
+// Appointment
+Route::resource("/appointment", AppointmentController::class);
 
 Auth::routes();
 

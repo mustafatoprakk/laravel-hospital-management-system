@@ -67,10 +67,11 @@
                             @endif
                         @endauth
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Appointment</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="#">About</a>
+                        </li>
+                        <li class="nav-item ms-4">
+                            <a class="btn btn-primary" href="{{ route('appointment.index') }}" role="button">Make an
+                                Appointment</a>
                         </li>
                     </ul>
 
@@ -116,6 +117,7 @@
             </div>
         </nav>
 
+
         <main class="pb-4">
             @yield('content')
         </main>
@@ -158,6 +160,31 @@
                         $("#department").html('<option value="">Select Department</option>');
                         $.each(result.department, function(key, value) {
                             $("#department").append('<option value="' + value.id +
+                                '"> ' + value.name.toUpperCase() + '</option>');
+                        })
+                    }
+                });
+            });
+
+
+            // getDoctor
+            $("#department").change(function(e) {
+                e.preventDefault();
+                var departmentId = this.value;
+                $("#doctor").html('');
+
+                $.ajax({
+                    url: '{{ route('getDoctor') }}',
+                    "method": "POST",
+                    data: {
+                        department: departmentId,
+                        _token: "{{ csrf_token() }}",
+                    },
+                    dataType: "json",
+                    success: function(result) {
+                        $("#doctor").html('<option value="">Select Doctor</option>');
+                        $.each(result.doctor, function(key, value) {
+                            $("#doctor").append('<option value="' + value.id +
                                 '"> ' + value.name.toUpperCase() + '</option>');
                         })
                     }
