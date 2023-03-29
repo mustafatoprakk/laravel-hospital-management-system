@@ -57,22 +57,23 @@
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <li><a class="dropdown-item" href="{{ route('doctor.index') }}">Doctors</a></li>
                                         <li><a class="dropdown-item" href="{{ route('department.index') }}">Departments</a>
-                                        </li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
                                         <li><a class="dropdown-item" href="{{ route('hospital.index') }}">Hospitals</a></li>
-                                    </ul>
                                 </li>
-                            @endif
-                        @endauth
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="{{ route('hour.index') }}">Hours</a></li>
+                        </ul>
                         </li>
-                        <li class="nav-item ms-4">
-                            <a class="btn btn-primary" href="{{ route('appointment.index') }}" role="button">Make an
-                                Appointment</a>
-                        </li>
+                        @endif
+                    @endauth
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item ms-4">
+                        <a class="btn btn-primary" href="{{ route('appointment.index') }}" role="button">Make an
+                            Appointment</a>
+                    </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

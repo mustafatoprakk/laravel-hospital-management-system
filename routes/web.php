@@ -4,6 +4,7 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\HospitalController;
+use App\Http\Controllers\HourController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -37,6 +38,8 @@ Route::resource("/department", DepartmentController::class);
 Route::resource("/hospital", HospitalController::class);
 // Appointment
 Route::resource("/appointment", AppointmentController::class);
+//Hour
+Route::resource("/hour", HourController::class);
 
 Auth::routes();
 
