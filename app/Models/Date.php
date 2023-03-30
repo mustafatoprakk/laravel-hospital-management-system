@@ -5,16 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Hour extends Model
+class Date extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        "hour"
+        "date",
+        "day"
     ];
 
-    public function date()
+    public function hour()
     {
-        return $this->belongsToMany(Date::class, "date_hour");
+        return $this->belongsToMany(Hour::class, "date_hour");
     }
 }

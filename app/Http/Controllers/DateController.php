@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreHourRequest;
+use App\Models\Date;
+use App\Http\Requests\StoredateRequest;
+use App\Http\Requests\UpdatedateRequest;
 use App\Models\Hour;
-use Illuminate\Http\Request;
 
-class HourController extends Controller
+class DateController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -24,8 +25,8 @@ class HourController extends Controller
      */
     public function index()
     {
-        $hours = Hour::all();
-        return view("hour.index", compact("hours"));
+        $dates = Date::all();
+        return view("date.index", compact("dates"));
     }
 
     /**
@@ -33,22 +34,32 @@ class HourController extends Controller
      */
     public function create()
     {
-        return view("hour.create");
+        $hours = Hour::all();
+        return view("date.create", compact("hours"));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreHourRequest $request)
+    public function store(StoredateRequest $request)
     {
-        Hour::create($request->validated());
-        return redirect()->back()->with("message", "Hour created.");
+        $day = date("l", strtotime($request->date));
+        $date = Date::create([
+            "date" => $request->date,
+            "day" => $day,
+        ]);
+
+        if ($request->has("hour")) {
+            $date->hour()->attach($request->hour);
+        }
+
+        return redirect()->back()->with("message", "Date created.");
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Hour $hour)
+    public function show(Date $date)
     {
         //
     }
@@ -56,7 +67,7 @@ class HourController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Hour $hour)
+    public function edit(Date $date)
     {
         //
     }
@@ -64,7 +75,7 @@ class HourController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Hour $hour)
+    public function update(UpdatedateRequest $request, Date $date)
     {
         //
     }
@@ -72,7 +83,7 @@ class HourController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Hour $hour)
+    public function destroy(Date $date)
     {
         //
     }

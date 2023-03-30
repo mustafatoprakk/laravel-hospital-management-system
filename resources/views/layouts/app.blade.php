@@ -63,6 +63,7 @@
                                     <hr class="dropdown-divider">
                                 </li>
                                 <li><a class="dropdown-item" href="{{ route('hour.index') }}">Hours</a></li>
+                                <li><a class="dropdown-item" href="{{ route('date.index') }}">Dates</a></li>
                         </ul>
                         </li>
                         @endif
@@ -71,7 +72,7 @@
                         <a class="nav-link" href="#">About</a>
                     </li>
                     <li class="nav-item ms-4">
-                        <a class="btn btn-primary" href="{{ route('appointment.index') }}" role="button">Make an
+                        <a class="btn btn-outline-secondary" href="{{ route('appointment.index') }}" role="button">Make an
                             Appointment</a>
                     </li>
                     </ul>
@@ -134,6 +135,14 @@
     <script>
         $(document).ready(function() {
             $('#department-multi-select').select2({
+                theme: "bootstrap-5",
+                width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' :
+                    'style',
+                placeholder: $(this).data('placeholder'),
+                closeOnSelect: false,
+            });
+
+            $('#hour-multi-select').select2({
                 theme: "bootstrap-5",
                 width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' :
                     'style',

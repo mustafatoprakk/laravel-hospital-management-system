@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\DateController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\HospitalController;
@@ -40,6 +41,8 @@ Route::resource("/hospital", HospitalController::class);
 Route::resource("/appointment", AppointmentController::class);
 //Hour
 Route::resource("/hour", HourController::class);
+//Date
+Route::resource("/date", DateController::class);
 
 Auth::routes();
 
