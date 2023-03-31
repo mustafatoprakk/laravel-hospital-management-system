@@ -43,17 +43,21 @@ class DateController extends Controller
      */
     public function store(StoredateRequest $request)
     {
-        $day = date("l", strtotime($request->date));
-        $date = Date::create([
-            "date" => $request->date,
-            "day" => $day,
-        ]);
+        foreach ($request->date as $key => $value) {
+            $day = date("l", strtotime($request->date[$key]));
+            $date = new Date();
+            $date->date = $request->date[$key];
+            $date->day = $day;
+            $date->save();
 
-        if ($request->has("hour")) {
-            $date->hour()->attach($request->hour);
+            if ($request->hour) {
+                $date->hour()->sync($request->hour);
+            }
         }
 
-        return redirect()->back()->with("message", "Date created.");
+        return redirect()->back()->with([
+            "message" => "Date created",
+        ]);
     }
 
     /**

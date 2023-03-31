@@ -72,7 +72,8 @@
                         <a class="nav-link" href="#">About</a>
                     </li>
                     <li class="nav-item ms-4">
-                        <a class="btn btn-outline-secondary" href="{{ route('appointment.index') }}" role="button">Make an
+                        <a class="btn btn-outline-secondary" href="{{ route('appointment.index') }}"
+                            role="button">Make an
                             Appointment</a>
                     </li>
                     </ul>
@@ -119,17 +120,16 @@
             </div>
         </nav>
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
         <main class="pb-4">
             @yield('content')
         </main>
     </div>
 
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 
     <script>

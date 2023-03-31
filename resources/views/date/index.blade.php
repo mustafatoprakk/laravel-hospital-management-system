@@ -12,7 +12,8 @@
                     @foreach ($dates as $date)
                         <div class="col-md-12 mb-4">
                             <div class="card shadow p-1 border-0 rounded">
-                                <div class="card-body text-center">{{ ucfirst($date->date) }}</div>
+                                <div class="card-body text-center">{{ $date->date . ' - ' . date('l', strtotime($date->date)) }}
+                                </div>
                             </div>
                         </div>
                     @endforeach
