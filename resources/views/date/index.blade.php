@@ -11,10 +11,12 @@
                     </div>
                     @foreach ($dates as $date)
                         <div class="col-md-12 mb-4">
-                            <div class="card shadow p-1 border-0 rounded">
-                                <div class="card-body text-center">{{ $date->date . ' - ' . date('l', strtotime($date->date)) }}
+                            <a href="{{ route('date.show', $date->id) }}" class="text-decoration-none text-dark">
+                                <div class="card shadow p-1 border-0 rounded">
+                                    <div class="card-body text-center">{{ $date->date . ' - ' . $date->day }}
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                     @endforeach
                 </div>

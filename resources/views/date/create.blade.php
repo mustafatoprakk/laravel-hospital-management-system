@@ -31,7 +31,7 @@
                                 <div class="col-md-11 hour my-4">
                                     <div class="form-floating mb-4">
                                         <input type="date" id="date" name="date[]" class="form-control "
-                                            placeholder="Date" />
+                                            min="{{ date('Y-m-d',strtotime("+1 day")) }}" placeholder="Date" />
                                         <label class="form-label" for="date">Date</label>
                                     </div>
                                     <select class="form-select mb-4" id="hour-multi-select" name="hour[]"
@@ -69,7 +69,7 @@
                         <div class="col-md-11 hour my-4">
                             <div class="form-floating mb-4">
                                 <input type="date" id="date" name="date[]" class="form-control "
-                                    placeholder="Date" />
+                                min="{{ date('Y-m-d',strtotime("tomorrow")) }}" placeholder="Date" />
                                 <label class="form-label" for="date">Date</label>
                             </div>
                             <select class="form-select mb-4 hour-multi-select" name="hour[]" id=""

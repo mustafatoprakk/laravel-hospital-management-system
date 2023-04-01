@@ -65,7 +65,8 @@ class DateController extends Controller
      */
     public function show(Date $date)
     {
-        //
+        $hours = Hour::all();
+        return view("date.edit", compact("date", "hours"));
     }
 
     /**
@@ -81,7 +82,17 @@ class DateController extends Controller
      */
     public function update(UpdatedateRequest $request, Date $date)
     {
-        //
+        $day = date("l", strtotime($request->date));
+        $date->update([
+            "date" => $request->date,
+            "day" => $day,
+        ]);
+
+        if ($request->hour) {
+            $date->hour()->sync($request->hour);
+        }
+
+        return redirect()->back()->with("message", "Date updated");
     }
 
     /**

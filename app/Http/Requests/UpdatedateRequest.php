@@ -11,7 +11,7 @@ class UpdatedateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class UpdatedateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "date" => ["required"],
+            "day" => ["nullable"],
+            "hour" => ["required"]
         ];
     }
 }
