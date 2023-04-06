@@ -39,6 +39,8 @@ Route::resource("/department", DepartmentController::class);
 Route::resource("/hospital", HospitalController::class);
 // Appointment
 Route::resource("/appointment", AppointmentController::class);
+Route::post("/make-appointment", [AppointmentController::class, "makeAppointment"])->name("makeAppointment");
+Route::post("/getHours", [AppointmentController::class, "getHours"])->name("getHours");
 //Hour
 Route::resource("/hour", HourController::class);
 //Date

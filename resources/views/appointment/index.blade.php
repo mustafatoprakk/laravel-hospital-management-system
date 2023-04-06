@@ -23,8 +23,9 @@
                     <h5 class="modal-title fw-bold" id="exampleModalToggleLabel">Make an Appointment</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <form action="" method="post">
+                <form action="{{ route('makeAppointment') }}" method="post">
+                    @csrf
+                    <div class="modal-body">
                         <!-- Hospital input -->
                         <div class="form-floating m-3">
                             <select id="hospital" name="hospital" class="form-select mb-4" aria-label="Hospital">
@@ -49,15 +50,16 @@
                             <label for="doctor">Select Doctor</label>
                         </div>
                         <!--<div class="form-floating mb-3 mx-3">
-                                            <input type="date" name="date" id="date" class="form-select">
-                                            <label for="doctor">Select Doctor</label>
-                                        </div>-->
+                                                            <input type="date" name="date" id="date" class="form-select">
+                                                            <label for="doctor">Select Doctor</label>
+                                                        </div>-->
 
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" data-bs-toggle="modal">Result Appointment</button>
-                </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" data-bs-toggle="modal">Result Appointment</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
