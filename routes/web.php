@@ -38,8 +38,9 @@ Route::resource("/department", DepartmentController::class);
 // Hospital
 Route::resource("/hospital", HospitalController::class);
 // Appointment
-Route::resource("/appointment", AppointmentController::class);
-Route::post("/make-appointment", [AppointmentController::class, "makeAppointment"])->name("makeAppointment");
+Route::get("/appointment.index", [AppointmentController::class, "index"])->name("appointment.index");
+Route::get("/appointment.create", [AppointmentController::class, "create"])->name("appointment.create");
+Route::post("/appointment.store", [AppointmentController::class, "store"])->name("appointment.store");
 Route::post("/getHours", [AppointmentController::class, "getHours"])->name("getHours");
 //Hour
 Route::resource("/hour", HourController::class);
@@ -48,4 +49,4 @@ Route::resource("/date", DateController::class);
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

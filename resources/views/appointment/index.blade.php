@@ -23,7 +23,7 @@
                     <h5 class="modal-title fw-bold" id="exampleModalToggleLabel">Make an Appointment</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ route('makeAppointment') }}" method="post">
+                <form action="{{ route('appointment.create') }}" method="get">
                     @csrf
                     <div class="modal-body">
                         <!-- Hospital input -->
@@ -50,9 +50,9 @@
                             <label for="doctor">Select Doctor</label>
                         </div>
                         <!--<div class="form-floating mb-3 mx-3">
-                                                            <input type="date" name="date" id="date" class="form-select">
-                                                            <label for="doctor">Select Doctor</label>
-                                                        </div>-->
+                                                                <input type="date" name="date" id="date" class="form-select">
+                                                                <label for="doctor">Select Doctor</label>
+                                                            </div>-->
 
 
                     </div>

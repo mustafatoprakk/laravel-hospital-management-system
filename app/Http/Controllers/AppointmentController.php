@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Appointment;
 use App\Http\Requests\StoreAppointmentRequest;
-use App\Http\Requests\UpdateAppointmentRequest;
+use App\Models\Appointment;
 use App\Models\Date;
 use App\Models\Doctor;
 use App\Models\Hospital;
 use App\Models\Hour;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AppointmentController extends Controller
 {
@@ -27,12 +27,11 @@ class AppointmentController extends Controller
         return view("appointment.index", compact("hospitals"));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $doctor = Doctor::where("id", $request->doctor)->first();
+        $dates = Date::all();
+        return view("appointment.create", compact("doctor", "dates"));
     }
 
     /**
@@ -40,46 +39,15 @@ class AppointmentController extends Controller
      */
     public function store(StoreAppointmentRequest $request)
     {
-        //
-    }
+        $user = Auth::user()->id;
+        Appointment::create([
+            "user_id" => $user,
+            "doctor_id" => $request->doctor_id,
+            "date_id" => $request->date,
+            "hour_id" => $request->hour,
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Appointment $appointment)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Appointment $appointment)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateAppointmentRequest $request, Appointment $appointment)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Appointment $appointment)
-    {
-        //
-    }
-
-    public function makeAppointment(Request $request)
-    {
-        $doctor = Doctor::where("id", $request->doctor)->first();
-        $dates = Date::all();
-        return view("appointment.makeAppointment", compact("doctor", "dates"));
+        return to_route("appointment.index");
     }
 
     public function getHours(Request $request)
@@ -89,6 +57,7 @@ class AppointmentController extends Controller
             ->join("date_hour as DH", "DH.hour_id", "id")
             ->join("dates as D", "D.id", "DH.date_id")
             ->where("D.id", $request->appointmentDate)
+            ->orderBy("id", "ASC")
             ->get();
 
         return response()->json($data);

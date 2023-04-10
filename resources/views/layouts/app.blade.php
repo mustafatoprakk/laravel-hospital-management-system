@@ -196,6 +196,8 @@
                         $.each(result.doctor, function(key, value) {
                             $("#doctor").append('<option value="' + value.id +
                                 '"> ' + value.name.toUpperCase() + '</option>');
+                            localStorage.setItem("appointmentDoctorId", value.id);
+                            localStorage.setItem("appointmentDoctorName", value.name);
                         })
                     }
                 });
